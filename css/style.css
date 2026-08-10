@@ -119,7 +119,7 @@ nav{
 .svc-head .rule{height:5px;width:150px;margin-top:16px;background:var(--grad-main);border-radius:3px}
 
 /* ---------- Panels / tables ---------- */
-.panel-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:22px;padding:26px 0 4px}
+.panel-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(520px,1fr));gap:22px;padding:26px 0 4px}
 .panel{
   background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);
   padding:22px;margin:22px 0;overflow-x:auto;
@@ -127,7 +127,7 @@ nav{
 .panel-grid .panel{margin:0}
 .panel h2{font-family:var(--font-head);font-size:20px;font-weight:700;color:var(--pink);margin-bottom:4px;letter-spacing:-.2px}
 .panel .en{display:block;font-size:12.5px;color:var(--violet);font-weight:600;margin-bottom:14px;letter-spacing:.3px}
-table{width:100%;border-collapse:collapse;font-size:14.5px;min-width:520px}
+table{width:100%;border-collapse:collapse;font-size:14.5px;min-width:480px}
 th{
   color:var(--pink-2);font-weight:700;text-align:left;padding:11px 14px;
   background:rgba(232,19,108,.13);font-size:12px;letter-spacing:.6px;text-transform:uppercase;
@@ -239,4 +239,16 @@ footer{border-top:1px solid var(--border);margin-top:56px;padding:44px 22px 28px
   .form-row{grid-template-columns:1fr}
   .hero{padding:48px 16px 24px}
   .stat{min-width:120px;padding:12px 18px}
+}
+@media (max-width:620px){
+  .panel{padding:16px 14px}
+  .panel h2{font-size:17px}
+  table{font-size:13px;min-width:420px}
+  th,td{padding:8px 10px}
+  .breadcrumb,.svc-head{padding-left:16px;padding-right:16px}
+  .hero-img{border-radius:12px;margin-top:12px}
+  .svc-head{padding-top:22px}
+}
+@media (max-width:900px){
+  .panel-grid{grid-template-columns:1fr}
 }
