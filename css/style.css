@@ -131,7 +131,7 @@ table{width:100%;border-collapse:collapse;font-size:14.5px;min-width:480px}
 th{
   color:var(--pink-2);font-weight:700;text-align:left;padding:11px 14px;
   background:rgba(232,19,108,.13);font-size:12px;letter-spacing:.6px;text-transform:uppercase;
-  border-bottom:1px solid var(--border-strong);white-space:nowrap;
+  border-bottom:1px solid var(--border-strong);
 }
 td{padding:10px 14px;border-bottom:1px solid rgba(255,255,255,.07);vertical-align:top}
 tr:last-child td{border-bottom:none}
