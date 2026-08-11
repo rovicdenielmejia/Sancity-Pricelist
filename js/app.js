@@ -4,6 +4,13 @@
   var SERVICES = window.SERVICES || [];
   var state = { items: [] };
 
+  function curService() {
+    var b = document.body.getAttribute("data-service");
+    if (b) return b.toLowerCase();
+    var m = (location.search || "").match(/[?&]svc=([^&]+)/);
+    return m ? decodeURIComponent(m[1].replace(/\+/g, " ")).toLowerCase() : "";
+  }
+
   /* ---------- Calculator ---------- */
   function money(n) {
     return "P" + Number(n).toLocaleString("en-PH", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
@@ -25,7 +32,7 @@
     var list = root.querySelector("[data-role=items]");
     var totalEl = root.querySelector("[data-role=total]");
     var countEl = root.querySelector("[data-role=count]");
-    var cur = (document.body.getAttribute("data-service") || "").toLowerCase();
+    var cur = curService();
 
     function unitWord(u) { return u === "sqft" ? "per sq ft" : u === "sqin" ? "per sq in" : "each"; }
     function unitAbbr(u) { return u === "sqft" ? "ft" : u === "sqin" ? "in" : ""; }
@@ -179,7 +186,6 @@
     var useBtn = root.querySelector("[data-role=use]");
     if (useBtn) useBtn.onclick = function () {
       var msg = document.querySelector("[data-role=cmessage]");
-      if (!msg) return;
       var t = "Hi, I would like to inquire about the following:\n";
       state.items.forEach(function (it) {
         var amt = it.area ? it.unit * it.area * it.qty : it.unit * it.qty;
@@ -189,9 +195,13 @@
       if (state.items.length) t += "Estimated total: " + money(state.items.reduce(function (a, b) {
         return a + (b.area ? b.unit * b.area * b.qty : b.unit * b.qty);
       }, 0)) + "\n\n";
-      msg.value = t;
-      var c = document.getElementById("contact");
-      if (c) c.scrollIntoView({ behavior: "smooth" });
+      if (msg) {
+        msg.value = t;
+        var c = document.getElementById("contact");
+        if (c) c.scrollIntoView({ behavior: "smooth" });
+      } else {
+        window.location.href = "inquiry.html?est=" + encodeURIComponent(t);
+      }
     };
     fillServices();
     render();
@@ -201,6 +211,11 @@
   function initContact() {
     var f = document.getElementById("contactForm");
     if (!f) return;
+    var est = (location.search || "").match(/[?&]est=([^&]+)/);
+    if (est) {
+      var msgEl = f.querySelector("[data-role=cmessage]");
+      if (msgEl) msgEl.value = decodeURIComponent(est[1].replace(/\+/g, " "));
+    }
     var svcSel = f.querySelector("[data-role=csvc]");
     if (svcSel && SERVICES.length) {
       SERVICES.forEach(function (s) {
@@ -209,7 +224,7 @@
         o.textContent = s.name;
         svcSel.appendChild(o);
       });
-      var cur = document.body.getAttribute("data-service");
+      var cur = curService();
       if (cur) {
         for (var i = 0; i < SERVICES.length; i++) if (SERVICES[i].slug === cur) { svcSel.value = SERVICES[i].name; break; }
       }

@@ -7,7 +7,7 @@
 </head><body>
 <nav>
   <a class="brand" href="index.html"><img class="logo-img" src="images/logo.png" alt="Sancity Graphics &amp; Prints logo"><span><span class="bname">Sancity Graphics &amp; Prints</span><span class="btag">Printing &amp; Design Services</span></span></a>
-  <div class="nav-links"><a href="#catalog">Catalog</a><a href="#calculator">Calculator</a><a href="#contact">Contact</a><a href="https://sancitystudios.base44.app" target="_blank" rel="noopener">Contact us</a></div>
+  <div class="nav-links"><a href="#catalog">Catalog</a><a href="calculator.html">Calculator</a><a href="inquiry.html">Inquiry</a><a href="https://sancitystudios.base44.app" target="_blank" rel="noopener">Contact us</a></div>
 </nav>
 <div class="hero">
   <div class="kicker">Sancity Graphics &amp; Prints &middot; Santiago, Isabela</div>
@@ -201,60 +201,24 @@
   </div>
 </div>
 <div class="wrap">
-  <div class="panel calc" id="calculator">
-  <h2>Cost Calculator</h2>
-  <div class="en">Estimate your order before you contact us — add multiple services and quantities.</div>
-  <div class="calc-form">
-    <div class="field"><label>Service</label><select data-role="svc"></select></div>
-    <div class="field"><label>Item / Option</label><select data-role="opt"></select></div>
-    <div class="field qty"><label>Quantity</label><input type="number" data-role="qty" min="1" value="1"><div class="qty-hint" data-role="qhint"></div></div>
-    <div class="field size" data-role="sizebox" hidden><label>Size (W &times; H)</label>
-      <div class="size-inputs">
-        <input type="number" data-role="sw" min="0" step="0.1" value="1">
-        <span class="mul">&times;</span>
-        <input type="number" data-role="sh" min="0" step="0.1" value="1">
-        <span class="sun" data-role="sun">sq ft</span>
-      </div>
-    </div>
-    <div class="actions">
-      <button type="button" class="btn" data-role="add">Add to estimate</button>
-      <button type="button" class="btn ghost" data-role="clear">Clear</button>
-    </div>
+  <div class="section-head">
+    <div class="kicker">Ready when you are</div>
+    <h2>Estimate &amp; Inquire</h2>
+    <p>Get a quick estimate with our calculator, then send us your inquiry for a final quotation.</p>
   </div>
-  <ul class="calc-items" data-role="items"></ul>
-  <div class="calc-total">
-    <div><small data-role="count">0 item(s)</small><div class="amt" data-role="total">P0.00</div></div>
-    <div style="text-align:right">
-      <button type="button" class="btn" data-role="use">Use estimate in my inquiry</button>
-      <div class="hint">Estimate only. Final prices/quotation may vary by specifications and quantity.</div>
-    </div>
-  </div>
-  </div>
-  <div class="panel contact" id="contact">
-  <div class="contact-grid">
-    <div>
-      <h2>Send an Inquiry</h2>
-      <div class="en">Tell us what you need and we will reply with a final quotation.</div>
-      <form class="form" id="contactForm">
-        <div class="form-row">
-          <div><label>Your Name</label><input data-role="cname" required placeholder="Full name"></div>
-          <div><label>Phone / Email</label><input data-role="ccontact" required placeholder="How can we reach you?"></div>
-        </div>
-        <div><label>Service of Interest</label><select data-role="csvc"></select></div>
-        <div><label>Message</label><textarea data-role="cmessage" required placeholder="Describe your order — size, quantity, and design needs..."></textarea></div>
-        <button type="submit" class="btn">Send Inquiry</button>
-      </form>
-      <div class="form-success">&#10003; Your email app should open with your inquiry. If it did not, message us on our Facebook page with the same details.</div>
-    </div>
-    <aside class="contact-aside">
-      <h3>How to Reach Us</h3>
-      <ul>
-        <li><span class="ic">&#9993;</span><div><b>Message</b>For inquiries, please message us</div></li>
-        <li><span class="ic">&#128205;</span><div><b>Location</b>Santiago, Isabela</div></li>
-        <li><span class="ic">&#128337;</span><div><b>Estimate</b>Use the calculator above for a quick total</div></li>
-      </ul>
-    </aside>
-  </div>
+  <div class="grid">
+    <a class="card" href="calculator.html">
+      <div class="cnum">Instant Estimate</div>
+      <h3>Cost Calculator</h3>
+      <div class="ctag">Pick a service and its options, choose a quantity or size, and see your estimated total in seconds.</div>
+      <div class="go">Open the calculator &raquo;</div>
+    </a>
+    <a class="card" href="inquiry.html">
+      <div class="cnum">Final Quotation</div>
+      <h3>Send an Inquiry</h3>
+      <div class="ctag">Tell us what you need and we will reply with a final quotation. You can include your estimate.</div>
+      <div class="go">Start your inquiry &raquo;</div>
+    </a>
   </div>
 </div>
 <footer>
@@ -266,8 +230,8 @@
     <div class="f-links">
       <div class="f-head">Browse</div>
       <a href="index.html">All Services</a>
-      <a href="index.html#calculator">Cost Calculator</a>
-      <a href="index.html#contact">Contact</a>
+      <a href="calculator.html">Cost Calculator</a>
+      <a href="inquiry.html">Send an Inquiry</a>
       <a href="https://sancitystudios.base44.app" target="_blank" rel="noopener">Contact us</a>
     </div>
     <div class="f-info">
@@ -278,6 +242,4 @@
   </div>
   <div class="f-bottom">&copy; 2026 Sancity Graphics &amp; Prints. Final prices / quotation may vary by specifications and quantity.</div>
 </footer>
-<script src="js/data.js"></script>
-<script src="js/app.js"></script>
 </body></html>

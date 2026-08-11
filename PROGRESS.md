@@ -4,6 +4,26 @@ Last updated: 2026-08-11
 
 Site folder: `C:\Users\MrUnjong\Documents\GitHub\Sancity-Pricelist\` (this repo).
 
+## Page Restructure (2026-08-11) — calculator & inquiry moved to standalone pages
+- New `calculator.html`: dedicated Cost Calculator page (all 34 services).
+  Supports `?svc=<slug>` to preselect a service. "Use estimate in my inquiry"
+  now redirects to `inquiry.html?est=<encoded>` when no contact form is on the page.
+- New `inquiry.html`: dedicated Send an Inquiry page. Supports `?svc=<slug>`
+  (preselects Service of Interest) and `?est=<encoded>` (prefills the message).
+- `index.html`: calculator + inquiry panels REMOVED (homepage = hero + catalog only),
+  replaced with a two-card "Estimate & Inquire" CTA section. JS scripts removed
+  (no calculator/contact on the page anymore).
+- Service pages (34): KEEP their inline calculator + inquiry form (per user request,
+  homepage-only move). Their nav/footer "Calculator" and "Contact" links now point
+  to same-page anchors `#calculator` / `#contact` (they previously pointed to
+  `../index.html#calculator|#contact`, which no longer exist).
+- `js/app.js`: added `curService()` (reads body data-service, falls back to
+  `?svc=` param); estimate handoff now navigates to inquiry.html when needed;
+  inquiry page prefills the message from `?est=`.
+- Verified via headless Chrome (CDP): no JS errors; nav/links/footer correct on
+  all page types; service preselection and estimate prefill work.
+- Note: these pages are new static files at repo root (calculator.html, inquiry.html).
+
 ## Current Task (COMPLETED)
 Per-catalog page layout fix: price list tables were being cut off and required
 horizontal scrolling inside narrow 3-column panels on desktop.
