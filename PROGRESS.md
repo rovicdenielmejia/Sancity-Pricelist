@@ -4,6 +4,14 @@ Last updated: 2026-08-11
 
 Site folder: `C:\Users\MrUnjong\Documents\GitHub\Sancity-Pricelist\` (this repo).
 
+## Messenger copy link (2026-08-11)
+- The success message's Facebook link (`#mmeLink`, m.me/SanCityStudio) now copies
+  the submitted inquiry to the clipboard before opening Messenger. Copied text:
+  Name / Contact / Service of Interest / Message. Uses `navigator.clipboard`
+  with an `execCommand` fallback.
+- Implemented in js/app.js (lastInquiry + initMmeCopy); id added to the link in
+  35 HTML files. Verified via headless Chrome: message copied + chat opened.
+
 ## Navigation Labels (2026-08-11)
 - Sub pages (all 34 service pages): nav + footer link `#contact` renamed
   "Contact" -> "Inquiry Form".

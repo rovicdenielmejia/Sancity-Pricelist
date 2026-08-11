@@ -3,6 +3,7 @@
   "use strict";
   var SERVICES = window.SERVICES || [];
   var state = { items: [] };
+  var lastInquiry = "";
 
   function curService() {
     var b = document.body.getAttribute("data-service");
@@ -254,6 +255,8 @@
         })
       }).then(function (r) { return r.json(); }).then(function (data) {
         if (data && (data.success === "true" || data.success === true)) {
+          lastInquiry = "Hi, I would like to inquire about the following:\n\nName: " + name +
+            "\nContact: " + contact + "\nService of Interest: " + svc + "\n\nMessage:\n" + msg;
           if (ok) ok.style.display = "block";
           f.reset();
         } else {
@@ -267,7 +270,31 @@
     });
   }
 
-  function boot() { initCalculator(); initContact(); }
+  function copyText(t) {
+    if (navigator.clipboard && window.isSecureContext) return navigator.clipboard.writeText(t);
+    var ta = document.createElement("textarea");
+    ta.value = t;
+    ta.style.position = "fixed";
+    ta.style.opacity = "0";
+    document.body.appendChild(ta);
+    ta.select();
+    try { document.execCommand("copy"); } catch (e) {}
+    document.body.removeChild(ta);
+    return Promise.resolve();
+  }
+
+  function initMmeCopy() {
+    var link = document.getElementById("mmeLink");
+    if (!link) return;
+    link.addEventListener("click", function (e) {
+      e.preventDefault();
+      var text = lastInquiry || "Hi! I'd like to inquire about your services.";
+      var open = function () { window.open(link.href, "_blank"); };
+      copyText(text).then(open, open);
+    });
+  }
+
+  function boot() { initCalculator(); initContact(); initMmeCopy(); }
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", boot);
   else boot();
 })();
