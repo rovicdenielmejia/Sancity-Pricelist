@@ -198,6 +198,7 @@
       }, 0)) + "\n\n";
       if (msg) {
         msg.value = t;
+        if (state.items.length) setServiceOfInterest(state.items[0].svc);
         var c = document.getElementById("contact");
         if (c) c.scrollIntoView({ behavior: "smooth" });
       } else {
@@ -209,6 +210,14 @@
   }
 
   /* ---------- Contact form ---------- */
+  function setServiceOfInterest(name) {
+    var sel = document.querySelector("[data-role=csvc]");
+    if (!sel) return;
+    for (var i = 0; i < sel.options.length; i++) {
+      if (sel.options[i].value === name || sel.options[i].text === name) { sel.selectedIndex = i; return; }
+    }
+  }
+
   function initContact() {
     var f = document.getElementById("contactForm");
     if (!f) return;
@@ -228,6 +237,9 @@
       var cur = curService();
       if (cur) {
         for (var i = 0; i < SERVICES.length; i++) if (SERVICES[i].slug === cur) { svcSel.value = SERVICES[i].name; break; }
+      } else if (est) {
+        var mm = (f.querySelector("[data-role=cmessage]").value || "").match(/^- ([^:]+):/m);
+        if (mm) setServiceOfInterest(mm[1].trim());
       }
     }
     f.addEventListener("submit", function (e) {

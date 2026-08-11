@@ -4,6 +4,14 @@ Last updated: 2026-08-11
 
 Site folder: `C:\Users\MrUnjong\Documents\GitHub\Sancity-Pricelist\` (this repo).
 
+## Auto-set Service of Interest (2026-08-11)
+- When the calculator's "Use estimate in my inquiry" is clicked, the Service of
+  Interest dropdown now auto-selects the first service from the estimate.
+- Also works on the `/inquiry?est=...` handoff: parses the first "- <Service>:"
+  line in the prefilled message and selects it.
+- Implemented in js/app.js (`setServiceOfInterest` helper). Explicit `?svc=`
+  still takes precedence. Verified via headless Chrome in both flows.
+
 ## Messenger copy link (2026-08-11)
 - The success message's Facebook link (`#mmeLink`, m.me/SanCityStudio) now copies
   the submitted inquiry to the clipboard before opening Messenger. Copied text:
