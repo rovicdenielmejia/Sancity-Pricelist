@@ -235,13 +235,35 @@
       var contact = f.querySelector("[data-role=ccontact]").value.trim();
       var svc = f.querySelector("[data-role=csvc]").value;
       var msg = f.querySelector("[data-role=cmessage]").value.trim();
-      var body = "Name: " + name + "\nContact: " + contact + "\nService: " + svc +
-        "\n\n" + msg + "\n\n---\nSent from " + window.location.href;
       var subject = "Inquiry: " + svc + (name ? " - " + name : "");
-      window.location.href = "mailto:?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(body);
+      var btn = f.querySelector("[type=submit]");
       var ok = f.parentNode.querySelector(".form-success");
-      if (ok) ok.style.display = "block";
-      f.reset();
+      var orig = btn ? btn.textContent : "";
+      if (btn) { btn.disabled = true; btn.textContent = "Sending..."; }
+      fetch("https://formsubmit.co/ajax/sancity.studio@gmail.com", {
+        method: "POST",
+        headers: { "Content-Type": "application/json", "Accept": "application/json" },
+        body: JSON.stringify({
+          _subject: subject,
+          _template: "table",
+          _captcha: "false",
+          Name: name,
+          Contact: contact,
+          "Service of Interest": svc,
+          Message: msg
+        })
+      }).then(function (r) { return r.json(); }).then(function (data) {
+        if (data && (data.success === "true" || data.success === true)) {
+          if (ok) ok.style.display = "block";
+          f.reset();
+        } else {
+          alert("Sorry, the inquiry could not be sent. Please email us at sancity.studio@gmail.com or try again.");
+        }
+        if (btn) { btn.disabled = false; btn.textContent = orig; }
+      }).catch(function () {
+        alert("Network error. Please email us at sancity.studio@gmail.com or try again.");
+        if (btn) { btn.disabled = false; btn.textContent = orig; }
+      });
     });
   }
 

@@ -4,6 +4,23 @@ Last updated: 2026-08-11
 
 Site folder: `C:\Users\MrUnjong\Documents\GitHub\Sancity-Pricelist\` (this repo).
 
+## Inquiries -> Email (2026-08-11) — FormSubmit direct send
+- All inquiry forms (`#contactForm` on inquiry.html + all 34 service pages)
+  now send directly to `sancity.studio@gmail.com` via FormSubmit AJAX:
+  `fetch POST https://formsubmit.co/ajax/sancity.studio@gmail.com`
+  (payload: `_subject`, `_template=table`, `_captcha=false`, Name, Contact,
+  Service of Interest, Message). No more `mailto:` — visitors don't need an
+  email app.
+- `js/app.js` submit handler updated; success message text updated in 35 files
+  ("Inquiry sent! We will reply to your email or phone as soon as possible.").
+- ACTIVATION REQUIRED (one-time): the FIRST inquiry submitted on the live site
+  triggers an activation email to sancity.studio@gmail.com — click the link in
+  it, then delivery works. Until activated, submissions may be dropped.
+- Verified via headless Chrome (fetch stubbed): correct endpoint + payload,
+  success message shows, form resets, no JS errors.
+- Free tier: no account needed. Caveat: no inbox storage/history; consider
+  Formspree or a serverless route later if delivery issues arise.
+
 ## Clean URLs / Vercel (2026-08-11)
 - `vercel.json` at repo root: `{ "trailingSlash": false, "cleanUrls": true }`.
   Vercel serves every `.html` page at its extensionless URL (e.g. `/services/01-tarpaulin`)
