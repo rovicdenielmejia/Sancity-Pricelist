@@ -4,6 +4,23 @@ Last updated: 2026-08-11
 
 Site folder: `C:\Users\MrUnjong\Documents\GitHub\Sancity-Pricelist\` (this repo).
 
+## Clean URLs / Vercel (2026-08-11)
+- `vercel.json` at repo root: `{ "trailingSlash": false, "cleanUrls": true }`.
+  Vercel serves every `.html` page at its extensionless URL (e.g. `/services/01-tarpaulin`)
+  and 308-redirects any request with `.html` to the clean URL (clean redirects).
+- All internal links are now extensionless, absolute paths:
+  `/`, `/calculator`, `/inquiry`, `/services/01-tarpaulin`, etc.
+  Applied to: index.html, calculator.html, inquiry.html, all 34 service pages,
+  and `js/app.js` (`/inquiry?est=` handoff).
+- Local preview server (`...\poster\website\server.js`) now falls back to
+  `file.html` for extensionless paths, so clean URLs work locally too.
+- Verified via local server: `/`, `/calculator?svc=24-t-shirt-and-print`,
+  `/inquiry`, `/services/01-tarpaulin`, `/services/34-canvas-frame`,
+  `/css/style.css`, `/js/app.js` all 200 with correct Content-Type.
+  No `href/src/action="*.html"` remains in any HTML/JS/CSS.
+- IMPORTANT: links are hard-coded absolute paths (deploy at a domain root on
+  Vercel). A generator re-run would overwrite the HTML — re-apply after.
+
 ## Page Restructure (2026-08-11) — calculator & inquiry moved to standalone pages
 - New `calculator.html`: dedicated Cost Calculator page (all 34 services).
   Supports `?svc=<slug>` to preselect a service. "Use estimate in my inquiry"

@@ -200,7 +200,7 @@
         var c = document.getElementById("contact");
         if (c) c.scrollIntoView({ behavior: "smooth" });
       } else {
-        window.location.href = "inquiry.html?est=" + encodeURIComponent(t);
+        window.location.href = "/inquiry?est=" + encodeURIComponent(t);
       }
     };
     fillServices();
