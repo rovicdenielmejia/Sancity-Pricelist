@@ -4,6 +4,16 @@ Last updated: 2026-08-11
 
 Site folder: `C:\Users\MrUnjong\Documents\GitHub\Sancity-Pricelist\` (this repo).
 
+## Navigation Labels (2026-08-11)
+- Sub pages (all 34 service pages): nav + footer link `#contact` renamed
+  "Contact" -> "Inquiry Form".
+- All pages: external social link (sancitystudios.base44.app) renamed
+  "Contact us" -> "Social Media Accounts" (nav + footer).
+- Also on home page: removed the "Browse by Service / Service Catalog /
+  Tap any catalog..." section-head (duplicate of the hero title).
+- Also on home page: removed the hero stats block (34 / Service Categories,
+  Print & Design, Instant / Estimate with calculator).
+
 ## Inquiries -> Email (2026-08-11) — FormSubmit direct send
 - All inquiry forms (`#contactForm` on inquiry.html + all 34 service pages)
   now send directly to `sancity.studio@gmail.com` via FormSubmit AJAX:
