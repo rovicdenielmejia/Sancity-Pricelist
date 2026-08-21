@@ -26,7 +26,7 @@
     var qhint = root.querySelector("[data-role=qhint]");
     var sw = root.querySelector("[data-role=sw]");
     var sh = root.querySelector("[data-role=sh]");
-    var sun = root.querySelector("[data-role=sun]");
+    var sunit = root.querySelector("[data-role=sunit]");
     var sizebox = root.querySelector("[data-role=sizebox]");
     var addBtn = root.querySelector("[data-role=add]");
     var clearBtn = root.querySelector("[data-role=clear]");
@@ -36,7 +36,24 @@
     var cur = curService();
 
     function unitWord(u) { return u === "sqft" ? "per sq ft" : u === "sqin" ? "per sq in" : "each"; }
-    function unitAbbr(u) { return u === "sqft" ? "ft" : u === "sqin" ? "in" : ""; }
+    function inputUnit() { return sunit ? sunit.value : "in"; }
+    /* convert a length from the chosen input unit to feet / inches */
+    function toFt(v) {
+      var u = inputUnit();
+      if (u === "cm") return v / 30.48;
+      if (u === "mm") return v / 304.8;
+      if (u === "m") return v * 3.280839895;
+      if (u === "ft") return v;
+      return v / 12;
+    }
+    function toIn(v) {
+      var u = inputUnit();
+      if (u === "cm") return v / 2.54;
+      if (u === "mm") return v / 25.4;
+      if (u === "m") return v * 39.37007874;
+      if (u === "ft") return v * 12;
+      return v;
+    }
 
     /* pick the unit price for a quantity given tier minimums */
     function tierPrice(tiers, q, base) {
@@ -95,7 +112,9 @@
     }
     function pieceArea() {
       var d = dims();
-      return d.w * d.h;
+      var c = selectedOpt();
+      if (c && c.u === "sqin") return toIn(d.w) * toIn(d.h);
+      return toFt(d.w) * toFt(d.h);
     }
     function totalArea() {
       return pieceArea() * q();
@@ -106,7 +125,6 @@
         if (sizebox) sizebox.hidden = true;
         return;
       }
-      if (sun) sun.textContent = c.u === "sqft" ? "sq ft" : "sq in";
       if (sizebox) sizebox.hidden = false;
     }
     function updateQtyHint() {
@@ -139,7 +157,7 @@
       var basis = c.u ? ar * qn : qn;
       var unit = tierPrice(c.t, basis, c.p);
       var d = dims();
-      var size = c.u ? d.w + " x " + d.h + " " + unitAbbr(c.u) : null;
+      var size = c.u ? d.w + " x " + d.h + " " + inputUnit() : null;
       state.items.push({ svc: s.name, opt: c.n, unit: unit, base: c.p, qty: qn, u: c.u, area: ar, size: size });
       render();
     }
@@ -180,6 +198,7 @@
     qty.addEventListener("input", updateQtyHint);
     sw.addEventListener("input", updateQtyHint);
     sh.addEventListener("input", updateQtyHint);
+    if (sunit) sunit.addEventListener("change", updateQtyHint);
     addBtn.onclick = add;
     clearBtn.onclick = function () { state.items = []; render(); };
 
